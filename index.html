@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter</title>
+  <link rel="stylesheet" type=text/css href="./main.css">
+</head>
+
+<body>
+  <div class="background">
+    <div class="background__circle-changing">
+      <img class="background__circle-img-changing" src="./images/EUR.jpg" alt="flag">
+    </div>
+    <div class="background__circle-poland">
+      <img class="background__circle-img-pl" src="./images/PLN.jpg" alt="pl">
+    </div>
+    <h1 class="heading">Currency Converter</h1>
+
+    <main class="main-box">
+      <form class="main-box__form">
+
+        <label class="main-box__form-label" for="amount">Amount</label>
+        <div class="main-box__form-field-wrapper">
+          <span class="main-box__form-spanForInput">$ &nbsp</span>
+          <input id="amount" class="main-box__form-input" type="number" min="0" autocomplete="off">
+        </div>
+
+        <label class="main-box__form-label" for="from">From</label>
+        <div class="main-box__form-field-wrapper">
+          <select class="main-box__form-select" name="" id="from">
+            <option value="EUR">Choose a currency</option>
+            <option value="EUR"><span>&#x1F1EA &#x1F1FA</span> &nbsp; &nbsp; &nbsp; EUR - Euro</option>
+            <option value="USD"><span>&#x1F1FA &#x1F1F8</span> &nbsp; &nbsp; &nbsp; USD - US Dollar</option>
+            <option value="GBP"><span>&#x1F1EC &#x1F1E7</span> &nbsp; &nbsp; &nbsp; GBP - British Pound
+            </option>
+            <option value="CHF"><span>&#x1F1E8 &#x1F1ED</span> &nbsp; &nbsp; &nbsp; CHF - Swiss Franc
+            </option>
+            <option value="NZD"><span>&#x1F1F3 &#x1F1FF</span> &nbsp; &nbsp; &nbsp; NZD - New
+              Zealand Dollar</option>
+          </select>
+        </div>
+
+        <div class="main-box__form-swap-currencies">
+        </div>
+
+        <label class="main-box__form-label" for="to">To</label>
+        <div class="main-box__form-field-wrapper">
+          <select class="main-box__form-select" name="" id="to">
+            <option value="PLN - Polish Zloty" selected><span>&#x1F1F5 &#x1F1F1</span> &nbsp; &nbsp; &nbsp; PLN - Polish
+              Zloty</option>
+          </select>
+        </div>
+
+        <div class="main-box__form-result-wraper">
+          <p class="main-box__form-result"></p>
+          <p class="main-box__form-result"></p>
+        </div>
+
+      </form>
+    </main>
+  </div>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
