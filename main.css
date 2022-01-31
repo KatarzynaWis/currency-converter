@@ -81,7 +81,7 @@ body {
   display: block;
   line-height: 24px;
   font-weight: 500;
-  color: #fff;
+  /* color: #fff; */
 }
 .main-box__form-field-wrapper {
   padding: 0 12px;
