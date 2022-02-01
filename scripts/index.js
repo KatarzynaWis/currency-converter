@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   // fetching data from the server
-  fetch("http://api.nbp.pl/api/exchangerates/tables/a/?format=json")
+  fetch("https://api.nbp.pl/api/exchangerates/tables/a/?format=json")
     .then((response) => response.json())
     .then((response) => {
       const rates = response[0].rates;
