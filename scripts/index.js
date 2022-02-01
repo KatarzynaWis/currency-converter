@@ -5,6 +5,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const qs = (selector) => document.querySelector(selector);
 
   // DOM elements
+  const loader = qs("#loader");
   const imgChangingFlagDOM = qs(".background__circle-img-changing");
   const formDOM = qs("#form");
   const inputAmountDOM = qs("#amount");
@@ -28,6 +29,9 @@ window.addEventListener("DOMContentLoaded", () => {
     funt: "&#xA3",
     frank: "CHF",
   };
+
+  //loader
+  loader.classList.toggle("hidden");
 
   // fetching data from the server
   fetch("https://api.nbp.pl/api/exchangerates/tables/a/?format=json")
@@ -181,5 +185,7 @@ window.addEventListener("DOMContentLoaded", () => {
       convert();
     })
     .catch((error) => console.error(error))
-    .finally();
+    .finally(() => {
+      loader.classList.toggle("hidden");
+    });
 });
