@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
     funt: "&#xA3",
     frank: "CHF",
   };
-console.log("test")
+
   // fetching data from the server
   fetch("http://api.nbp.pl/api/exchangerates/tables/a/?format=json")
     .then((response) => response.json())
