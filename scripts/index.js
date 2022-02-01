@@ -6,11 +6,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // DOM elements
   const imgChangingFlagDOM = qs(".background__circle-img-changing");
-  const inputAmoutDOM = qs("#amount");
+  const formDOM = qs("#form");
+  const inputAmountDOM = qs("#amount");
   const spanSymbolDOM = qs("#symbol");
   const selectFromDOM = qs("#from");
-  const paragraphResultToConvertDOM = qs("#resultToConvert");
-  const paragraphResultConvertedDOM = qs("#resultConverted");
+  const paraResultToConvertDOM = qs("#resultToConvert");
+  const paraResultConvertedDOM = qs("#resultConverted");
+  const paraUnitRatesDOM = qs("#unitRates");
 
   // data
   const emoji = {
@@ -74,11 +76,13 @@ window.addEventListener("DOMContentLoaded", () => {
             e.target.options[e.target.selectedIndex].attributes.code.value;
           const nameAttritubeValue =
             e.target.options[e.target.selectedIndex].attributes.name.value;
-        
+
           imgChangingFlagDOM.src = `./images/${codeAttritubeValue}.jpg`;
 
           const findSymbol = () => {
-            const symbolInArray = Object.entries(symbols).filter((table) => nameAttritubeValue.includes(table[0]));
+            const symbolInArray = Object.entries(symbols).filter((table) =>
+              nameAttritubeValue.includes(table[0])
+            );
             const symbol = symbolInArray.flat()[1];
             return symbol;
           };
@@ -86,6 +90,95 @@ window.addEventListener("DOMContentLoaded", () => {
         });
       };
       changeFlagAndSymbol();
+
+      const inflectCurrencyName = (currencyName, amountValue) => {
+        const lastChar = amountValue.substr(-1,1);
+    
+        if (currencyName.includes("dolar")) {
+          switch (true) {
+            case (amountValue.includes(".")) : return "Dolara";
+              break;
+            case (amountValue == 1) : return "Dolar";
+              break;
+            case (amountValue >=2 && amountValue <=4 ) : return "Dolary";
+              break;
+            case (amountValue > 20 && (lastChar >= 2 && lastChar <= 4) ) : return "Dolary";
+              break;
+            default: return "Dolarów"
+              break;
+          }
+        } else if (currencyName.includes("euro")) {
+          return "Euro";
+        } else if (currencyName.includes("frank")) {
+          switch (true) {
+            case (amountValue.includes(".")) : return "Franka";
+              break;
+            case (amountValue == 1) : return "Frank";
+              break;
+            case (amountValue >=2 && amountValue <=4 ) : return "Franki";
+              break;
+            case (amountValue > 20 && (lastChar >= 2 && lastChar <= 4) ) : return "Franki";
+              break;
+            default: return "Franków"
+              break;
+          }
+        } else if (currencyName.includes("funt")) {
+          switch (true) {
+            case (amountValue.includes(".")) : return "Funta";
+              break;
+            case (amountValue == 1) : return "Funt";
+              break;
+            case (amountValue >=2 && amountValue <=4 ) : return "Funty";
+              break;
+            case (amountValue > 20 && (lastChar >= 2 && lastChar <= 4) ) : return "Funty";
+              break;
+            default: return "Funtów"
+              break;
+          }
+        }
+      };
+
+      const inflectPLN = (resultPLN) => {
+        console.log(resultPLN);
+        
+        const lastChar = resultPLN.toString().substr(-1,1);
+      
+        switch (true) {
+          case (!Number.isInteger(resultPLN)) : return "Złotych";
+            break;
+          case (resultPLN === 1) : return "Złoty";
+            break;
+          case (resultPLN >=2 && resultPLN <=4 ) : return "Złote";
+            break;
+          case (resultPLN > 20 && (lastChar >= 2 && lastChar <= 4) ) : return "Złote";
+            break;
+          default: return "Złotych"
+            break;
+        }
+      };
+
+      const convert = () => {
+        formDOM.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const { amount, from } = e.currentTarget.elements;
+          const amountValue = amount.value;
+          const selectedOption = from.options[from.selectedIndex];
+          const name = selectedOption.attributes.name.value;
+          const code = selectedOption.attributes.code.value;
+          const midRate = selectedOption.attributes.mid.value;
+          const resultPLN = amountValue * midRate;
+          paraResultToConvertDOM.innerHTML = `${amountValue} ${inflectCurrencyName(name, amountValue)} =   &nbsp`;
+          paraResultConvertedDOM.textContent = `${resultPLN.toFixed(
+            2
+          )} ${inflectPLN(resultPLN)}`;
+          paraUnitRatesDOM.textContent = `1 PLN = ${midRate} ${code}`;
+
+          //reset amount
+          inputAmountDOM.value = "";
+        });
+      };
+      convert();
     })
     .catch((error) => console.error(error))
     .finally();
