@@ -99,14 +99,6 @@ window.addEventListener("DOMContentLoaded", () => {
       };
       changeFlagAndSymbol();
 
-      const showKeyboard = () => {
-        inputAmountDOM.addEventListener("click", (e) => {
-          console.log(e.target)
-          e.target.removeAttribute("inputmode")
-        })
-      };
-      showKeyboard();
-
       const inflectCurrencyName = (currencyName, amountValue) => {
         const lastChar = amountValue.substr(-1, 1);
 
@@ -215,8 +207,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
           //reset amount
           inputAmountDOM.value = "";
-          //hide keyboard
-          inputAmountDOM.setAttribute("inputmode", "none");
+      
         });
       };
       convert();

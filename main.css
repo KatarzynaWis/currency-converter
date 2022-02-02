@@ -12,8 +12,10 @@
   font-weight: 400;
 }
 body {
+  /* padding-top: 30px; */
   background: rgba(255, 255, 255, 0);
   overflow: hidden;
+  border: 1px solid red;
 }
 .loader {
   height: 100vh;
@@ -63,6 +65,7 @@ body {
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
+  border: 1px solid green;
 }
 .background__circle-changing {
   width: 90vw;
@@ -96,12 +99,13 @@ body {
 }
 .heading {
   margin: 30px 0;
-  position: relative;
+  display: inline-block;
   text-align: center;
   font-family: "Huge";
   font-size: 15vw;
   text-transform: uppercase;
   transition: 1s;
+  border: 1px solid blue;
 }
 /* glass effect */
 .main-box {
@@ -221,6 +225,9 @@ body {
   }
   .heading {
     line-height: 62vh;
+  }
+  .main-box {
+    position: absolute;
   }
   .main-box__form-label {
     color: #000;
