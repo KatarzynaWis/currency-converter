@@ -161,13 +161,6 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       };
 
-      const showKeyboard = () => {
-      inputAmountDOM.addEventListener("click", (e) => {
-        e.target.removeAttribure(inputmode);
-      })
-      }
-      showKeyboard();
-
       const inflectPLN = (resultPLN) => {
         console.log(resultPLN);
 
@@ -215,9 +208,6 @@ window.addEventListener("DOMContentLoaded", () => {
           //reset amount
           inputAmountDOM.value = "";
       
-          //turn off on-screen keyboard
-          inputAmountDOM.setAttribute("inputmode", "none")
-
         });
       };
       convert();
