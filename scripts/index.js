@@ -91,52 +91,79 @@ window.addEventListener("DOMContentLoaded", () => {
             return symbol;
           };
           spanSymbolDOM.innerHTML = findSymbol();
+
+          paraResultToConvertDOM.textContent = "";
+          paraResultConvertedDOM.textContent = "";
+          paraUnitRatesDOM.textContent = "";
         });
       };
       changeFlagAndSymbol();
 
+      const showKeyboard = () => {
+        inputAmountDOM.addEventListener("click", (e) => {
+          console.log(e.target)
+          e.target.removeAttribute("inputmode")
+        })
+      };
+      showKeyboard();
+
       const inflectCurrencyName = (currencyName, amountValue) => {
-        const lastChar = amountValue.substr(-1,1);
-    
+        const lastChar = amountValue.substr(-1, 1);
+
         if (currencyName.includes("dolar")) {
           switch (true) {
-            case (amountValue.includes(".")) : return "Dolara";
+            case amountValue.includes("."):
+              return "Dolara";
               break;
-            case (amountValue == 1) : return "Dolar";
+            case amountValue == 1:
+              return "Dolar";
               break;
-            case (amountValue >=2 && amountValue <=4 ) : return "Dolary";
+            case amountValue >= 2 && amountValue <= 4:
+              return "Dolary";
               break;
-            case (amountValue > 20 && (lastChar >= 2 && lastChar <= 4) ) : return "Dolary";
+            case amountValue > 20 && lastChar >= 2 && lastChar <= 4:
+              return "Dolary";
               break;
-            default: return "Dolarów"
+            default:
+              return "Dolarów";
               break;
           }
         } else if (currencyName.includes("euro")) {
           return "Euro";
         } else if (currencyName.includes("frank")) {
           switch (true) {
-            case (amountValue.includes(".")) : return "Franka";
+            case amountValue.includes("."):
+              return "Franka";
               break;
-            case (amountValue == 1) : return "Frank";
+            case amountValue == 1:
+              return "Frank";
               break;
-            case (amountValue >=2 && amountValue <=4 ) : return "Franki";
+            case amountValue >= 2 && amountValue <= 4:
+              return "Franki";
               break;
-            case (amountValue > 20 && (lastChar >= 2 && lastChar <= 4) ) : return "Franki";
+            case amountValue > 20 && lastChar >= 2 && lastChar <= 4:
+              return "Franki";
               break;
-            default: return "Franków"
+            default:
+              return "Franków";
               break;
           }
         } else if (currencyName.includes("funt")) {
           switch (true) {
-            case (amountValue.includes(".")) : return "Funta";
+            case amountValue.includes("."):
+              return "Funta";
               break;
-            case (amountValue == 1) : return "Funt";
+            case amountValue == 1:
+              return "Funt";
               break;
-            case (amountValue >=2 && amountValue <=4 ) : return "Funty";
+            case amountValue >= 2 && amountValue <= 4:
+              return "Funty";
               break;
-            case (amountValue > 20 && (lastChar >= 2 && lastChar <= 4) ) : return "Funty";
+            case amountValue > 20 && lastChar >= 2 && lastChar <= 4:
+              return "Funty";
               break;
-            default: return "Funtów"
+            default:
+              return "Funtów";
               break;
           }
         }
@@ -144,19 +171,24 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const inflectPLN = (resultPLN) => {
         console.log(resultPLN);
-        
-        const lastChar = resultPLN.toString().substr(-1,1);
-      
+
+        const lastChar = resultPLN.toString().substr(-1, 1);
+
         switch (true) {
-          case (!Number.isInteger(resultPLN)) : return "Złotych";
+          case !Number.isInteger(resultPLN):
+            return "Złotych";
             break;
-          case (resultPLN === 1) : return "Złoty";
+          case resultPLN === 1:
+            return "Złoty";
             break;
-          case (resultPLN >=2 && resultPLN <=4 ) : return "Złote";
+          case resultPLN >= 2 && resultPLN <= 4:
+            return "Złote";
             break;
-          case (resultPLN > 20 && (lastChar >= 2 && lastChar <= 4) ) : return "Złote";
+          case resultPLN > 20 && lastChar >= 2 && lastChar <= 4:
+            return "Złote";
             break;
-          default: return "Złotych"
+          default:
+            return "Złotych";
             break;
         }
       };
@@ -172,7 +204,10 @@ window.addEventListener("DOMContentLoaded", () => {
           const code = selectedOption.attributes.code.value;
           const midRate = selectedOption.attributes.mid.value;
           const resultPLN = amountValue * midRate;
-          paraResultToConvertDOM.innerHTML = `${amountValue} ${inflectCurrencyName(name, amountValue)} =   &nbsp`;
+          paraResultToConvertDOM.innerHTML = `${amountValue} ${inflectCurrencyName(
+            name,
+            amountValue
+          )} =   &nbsp`;
           paraResultConvertedDOM.textContent = `${resultPLN.toFixed(
             2
           )} ${inflectPLN(resultPLN)}`;
@@ -180,6 +215,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
           //reset amount
           inputAmountDOM.value = "";
+          //hide keyboard
+          inputAmountDOM.setAttribute("inputmode", "none");
         });
       };
       convert();
